@@ -9,7 +9,7 @@ pipeline {
       steps {
         sh 'wget -O DOIRootCA2.cer http://sslhelp.doi.net/docs/DOIRootCA2.cer'
         git "https://github.com/wdwatkins/wbeep-processing"
-        sh 'aws s3 sync s3://prod-owi-resources/resources/Application/delaware-basin/data_sets . --remove'
+        sh 'aws s3 sync s3://prod-owi-resources/resources/Application/delaware-basin/data_sets .'
       }
     }
     stage('create tileset') {
