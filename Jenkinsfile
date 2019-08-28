@@ -28,7 +28,7 @@ pipeline {
       steps { 
         sh '''
           aws s3 sync tile_dir s3://delaware-basin-test-website/test_tiles --content-encoding "gzip" --content-type application/x-protobuf --exclude "*.json" 
-          aws s3 cp tile_dir/metadata.json s3://delaware-basin-test-website/test_tiles/metadata.json --content-encoding "application/json" --profile chsprod
+          aws s3 cp tile_dir/metadata.json s3://delaware-basin-test-website/test_tiles/metadata.json --content-encoding "application/json" 
           '''
       }
     }
