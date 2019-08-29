@@ -4,11 +4,25 @@ pipeline {
             label 'node:slave'
         }
     }
+    parameters {
+        gitParameter name: 'BRANCH_TAG',
+                     type: 'PT_BRANCH_TAG',
+                     defaultValue: 'master'
+        choice(choices: ['test', 'prod'], description: 'Tier to deploy tiles to', name: 'TIER')
+    }
   stages {
     stage('Checkout repo and pull from S3') {
       steps {
         sh 'wget -O DOIRootCA2.cer http://sslhelp.doi.net/docs/DOIRootCA2.cer'
-        git "https://github.com/wdwatkins/wbeep-processing"
+        // git "https://github.com/wdwatkins/wbeep-processing"
+          checkout([$class: 'GitSCM',
+                          branches: [[name: "${params.BRANCH_TAG}"]],
+                          doGenerateSubmoduleConfigurations: false,
+                          extensions: [],
+                          gitTool: 'Default',
+                          submoduleCfg: [],
+                          userRemoteConfigs: [[url: 'https://github.com/wdwatkins/delaware-basin-tiles.git']]
+                        ])
         sh 'aws s3 sync s3://prod-owi-resources/resources/Application/delaware-basin/data_sets .'
       }
     }
