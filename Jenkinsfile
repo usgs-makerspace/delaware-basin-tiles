@@ -18,7 +18,6 @@ pipeline {
 	  }
     stage('Checkout repo and pull from S3') {
       steps {
-        sh 'aws s3 sync s3://prod-owi-resources/resources/Application/delaware-basin/data_sets . --delete'
         sh 'wget -O DOIRootCA2.cer http://sslhelp.doi.net/docs/DOIRootCA2.cer'
           checkout([$class: 'GitSCM',
                           branches: [[name: "${params.BRANCH_TAG}"]],
@@ -28,6 +27,7 @@ pipeline {
                           submoduleCfg: [],
                           userRemoteConfigs: [[url: 'https://github.com/wdwatkins/delaware-basin-tiles.git']]
                         ])
+          sh 'aws s3 sync s3://prod-owi-resources/resources/Application/delaware-basin/data_sets .'
       }
     }
     stage('create tileset') {
