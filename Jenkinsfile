@@ -34,7 +34,7 @@ pipeline {
         } 
       }
       steps {
-        sh 'tippecanoe --simplify-only-low-zooms --force --output-to-directory tile_dir delaware_PRMS_streams.geojson delaware_sites_summary.geojson nhd_hires_flowlines.geojson nhd_hires_waterbodies.geojson'
+        sh 'tippecanoe --drop-densest-as-needed --simplify-only-low-zooms --force --output-to-directory tile_dir delaware_PRMS_streams.geojson delaware_sites_summary.geojson nhd_hires_flowlines.geojson nhd_hires_waterbodies.geojson'
       }
     }
     stage('push to S3') {
