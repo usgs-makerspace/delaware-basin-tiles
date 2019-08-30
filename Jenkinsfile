@@ -11,6 +11,11 @@ pipeline {
         choice(choices: ['test', 'prod'], description: 'Tier to deploy tiles to', name: 'TIER')
     }
   stages {
+    stage('Clean Workspace') {
+	    steps{
+		    cleanWs()
+	     }
+	  }
     stage('Checkout repo and pull from S3') {
       steps {
         sh 'aws s3 sync s3://prod-owi-resources/resources/Application/delaware-basin/data_sets . --delete'
