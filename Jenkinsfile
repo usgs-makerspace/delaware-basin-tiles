@@ -14,7 +14,6 @@ pipeline {
     stage('Checkout repo and pull from S3') {
       steps {
         sh 'wget -O DOIRootCA2.cer http://sslhelp.doi.net/docs/DOIRootCA2.cer'
-        // git "https://github.com/wdwatkins/wbeep-processing"
           checkout([$class: 'GitSCM',
                           branches: [[name: "${params.BRANCH_TAG}"]],
                           doGenerateSubmoduleConfigurations: false,
