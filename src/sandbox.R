@@ -53,5 +53,5 @@ bodies <- readRDS('~/Downloads/nhd_waterbody_subset.rds')
 bodies_write <- bodies %>% st_transform(crs = 4326) %>% 
   dplyr::select(Permanent_Identifier, FType, GNIS_Name, GNIS_ID, FCode,
                 Elevation, ReachCode, geom, NHDPlusID) 
-geojson_write(flowlines_write, file = "nhd_hires_waterbodies.geojson",
+geojson_write(bodies_write, file = "nhd_hires_waterbodies.geojson",
               precision = 4, geometry = "polygon")
