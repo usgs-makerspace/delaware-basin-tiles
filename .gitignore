@@ -1,0 +1,15 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.geojson
+*.json
+*.sh?
+*.zip
+*.png
+*.prj
+*.dbf
+*.sb?
+*.xml
+*.cpg
+tile_*
