@@ -45,8 +45,8 @@ pipeline {
     stage('push to S3') {
       steps { 
         sh '''
-          aws s3 sync tile_dir s3://delaware-basin-test-website/tiles --content-encoding "gzip" --content-type application/x-protobuf --exclude "*.json"  --delete
-          aws s3 cp tile_dir/metadata.json s3://delaware-basin-test-website/tiles/metadata.json --content-encoding "application/json" 
+          aws s3 sync tile_dir s3://delaware-basin-${TIER}-website/tiles --content-encoding "gzip" --content-type application/x-protobuf --exclude "*.json"  --delete
+          aws s3 cp tile_dir/metadata.json s3://delaware-basin-${TIER}-website/tiles/metadata.json --content-encoding "application/json" 
           '''
       }
     }
