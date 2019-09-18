@@ -49,8 +49,8 @@ pipeline {
     stage('push to S3') {
       steps { 
         sh '''
-          aws s3 sync tile_dir_simple5 s3://backup-prod-owi-resources/resources/Application/delaware-basin/tiles_hru/ --content-encoding "gzip" --content-type application/x-protobuf --exclude "*.json"  --delete
-          aws s3 cp tile_dir_simple5/metadata.json s3://backup-prod-owi-resources/resources/Application/delaware-basin/tiles_hru/metadata.json --content-encoding "application/json" 
+          aws s3 sync tile_dir_simple5 s3://maptiles-prod-website/vector/hru/ --content-encoding "gzip" --content-type application/x-protobuf --exclude "*.json"  --delete
+          aws s3 cp tile_dir_simple5/metadata.json s3://maptiles-prod-website/vector/hru/metadata.json --content-encoding "application/json" 
         '''
       }
     }
